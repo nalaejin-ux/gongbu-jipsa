@@ -448,71 +448,79 @@ export default function App(){
   );
 
   // ── GARDEN ─────────────────────────────────────────────
-  if(screen==="garden"){
-    const ds=pdata?.lastCompleted?Math.floor((Date.now()-new Date(pdata.lastCompleted).getTime())/86400000):999;
-    return(
-      <div style={{minHeight:"100vh",background:C.bg}}>
-        <div style={{maxWidth:480,margin:"0 auto",padding:"20px 16px 80px"}}>
-          <NavBar title={`${prof?.name||"나"}의 텃밭 🌷`} onBack={()=>setScreen("home")}/>
-          {char&&<div style={{marginBottom:18}} className="fadeUp"><Bubble char={char} text={phrase||(seeds.length>0?`씨앗 ${seeds.length}개! 심어볼까? 🌱`:garden.length>0?"꾸준히 공부해야 꽃이 건강해! 💪":"공부 완료하면 씨앗을 받을 수 있어!")}/></div>}
-          {/* stats */}
-          <div className="fadeUp d1" style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10,marginBottom:20}}>
-            {[{n:seeds.length,l:"씨앗",e:"🌱"},{n:garden.length,l:"꽃",e:"🌷"},{n:pdata?.streak||0,l:"연속일",e:"🔥"}].map((s,i)=>(
-              <div key={i} style={{background:C.surface,borderRadius:R.lg,padding:"15px 7px",textAlign:"center",boxShadow:SH.card,border:`1.5px solid ${C.border}`}}>
-                <div style={{fontSize:26}}>{s.e}</div>
-                <div style={{fontSize:F.h1,fontWeight:900,color:C.text}}>{s.n}</div>
-                <div style={{fontSize:F.sm,color:C.muted,fontWeight:700}}>{s.l}</div>
+  if (screen === "garden") {
+    const ds = pdata?.lastCompleted ? Math.floor((Date.now() - new Date(pdata.lastCompleted).getTime()) / 86400000) : 999;
+    return (
+      <div style={{ minHeight: "100vh", background: C.bg }}>
+        <div style={{ maxWidth: 480, margin: "0 auto", padding: "20px 16px 80px" }}>
+          <NavBar title={`${prof?.name || "나"}의 텃밭 🌷`} onBack={() => setScreen("home")} />
+          {char && (
+            <div style={{ marginBottom: 18 }} className="fadeUp">
+              <Bubble char={char} text={phrase || (seeds.length > 0 ? `씨앗 ${seeds.length}개! 심어볼까? 🌱` : garden.length > 0 ? "꾸준히 공부해야 꽃이 건강해! 💪" : "공부 완료하면 씨앗을 받을 수 있어!")} />
+            </div>
+          )}
+
+          <div className="fadeUp d1" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, marginBottom: 20 }}>
+            {[{ n: seeds.length, l: "씨앗", e: "🌱" }, { n: garden.length, l: "꽃", e: "🌷" }, { n: pdata?.streak || 0, l: "연속일", e: "🔥" }].map((s, i) => (
+              <div key={i} style={{ background: C.surface, borderRadius: R.lg, padding: "15px 7px", textAlign: "center", boxShadow: SH.card, border: `1.5px solid ${C.border}` }}>
+                <div style={{ fontSize: 26 }}>{s.e}</div>
+                <div style={{ fontSize: F.h1, fontWeight: 900, color: C.text }}>{s.n}</div>
+                <div style={{ fontSize: F.sm, color: C.muted, fontWeight: 700 }}>{s.l}</div>
               </div>
             ))}
           </div>
-          {/* wilt warning */}
-          {ds>=1&&garden.length>0&&<div className="fadeUp" style={{background:"#FFF2EE",border:`2px solid ${C.coral}`,borderRadius:R.md,padding:"11px 14px",marginBottom:16,display:"flex",alignItems:"center",gap:9}}>
-            <span style={{fontSize:22}}>⚠️</span>
-            <div>
-              <div style={{fontSize:F.body,fontWeight:800,color:C.coral}}>{ds}일 쉬었어요!</div>
-              <div style={{fontSize:F.sm,color:"#C04020",fontWeight:600}}>꽃이 {Math.min(100,ds*20)}% 시들고 있어요. 빨리 공부해요!</div>
+
+          {ds >= 1 && garden.length > 0 && (
+            <div className="fadeUp" style={{ background: "#FFF2EE", border: `2px solid ${C.coral}`, borderRadius: R.md, padding: "11px 14px", marginBottom: 16, display: "flex", alignItems: "center", gap: 9 }}>
+              <span style={{ fontSize: 22 }}>⚠️</span>
+              <div>
+                <div style={{ fontSize: F.body, fontWeight: 800, color: C.coral }}>{ds}일 쉬었어요!</div>
+                <div style={{ fontSize: F.sm, color: "#C04020", fontWeight: 600 }}>꽃이 {Math.min(100, ds * 20)}% 시들고 있어요. 빨리 공부해요!</div>
+              </div>
             </div>
-          </div>}
-          {/* seeds */}
-          {seeds.length>0&&<div className="fadeUp d2" style={{background:C.surface,borderRadius:R.lg,padding:"17px 15px",marginBottom:20,boxShadow:SH.card,border:`1.5px solid ${C.border}`}}>
-            <Label style={{marginBottom:13}}>씨앗 보관함 ({seeds.length}개) 🌱</Label>
-            <div style={{display:"flex",flexWrap:"wrap",gap:9}}>
-              {seeds.map((seed,i)=>(
-                <button key={i} onClick={()=>setPlantIdx(i)} style={{background:C.surfaceAlt,border:`2px dashed ${C.border}`,borderRadius:R.md,padding:"11px 13px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:5,fontFamily:"inherit",transition:"all .15s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.purple;e.currentTarget.style.background=C.purpleP;}} onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.background=C.surfaceAlt;}}>
-                  <FlowerSVG color={FCLR[seed.id]||"#FD79A8"} petals={FPET[seed.id]||6} size={42}/>
-                  <span style={{fontSize:F.sm,fontWeight:700,color:C.sub}}>심기</span>
-                </button>
-              ))}
+          )}
+
+          {seeds.length > 0 && (
+            <div className="fadeUp d2" style={{ background: C.surface, borderRadius: R.lg, padding: "17px 15px", marginBottom: 20, boxShadow: SH.card, border: `1.5px solid ${C.border}` }}>
+              <Label style={{ marginBottom: 13 }}>씨앗 보관함 ({seeds.length}개) 🌱</Label>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 9 }}>
+                {seeds.map((seed, i) => (
+                  <button key={i} onClick={() => setPlantIdx(i)} style={{ background: C.surfaceAlt, border: `2px dashed ${C.border}`, borderRadius: R.md, padding: "11px 13px", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 5, fontFamily: "inherit", transition: "all .15s" }}>
+                    <FlowerSVG color={FCLR[seed.id] || "#FD79A8"} petals={FPET[seed.id] || 6} size={42} />
+                    <span style={{ fontSize: F.sm, fontWeight: 700, color: C.sub }}>심기</span>
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>}
-          {/* plant modal */}
-          {plantIdx!==null&&seeds[plantIdx]&&<div style={{position:"fixed",inset:0,background:"rgba(44,34,100,.5)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:200,padding:"0 20px"}}>
-            <div className="scaleIn" style={{background:C.surface,borderRadius:R.xl,padding:"30px 22px",textAlign:"center",width:"100%",maxWidth:340,boxShadow:SH.float}}>
-              <div style={{display:"flex",justifyContent:"center",animation:"bloom .6s ease-out",marginBottom:11}}><FlowerSVG color={FCLR[seeds[plantIdx].id]||"#FD79A8"} petals={FPET[seeds[plantIdx].id]||6} size={76}/></div>
-              <div style={{fontSize:F.h2,fontWeight:900,color:C.text,marginBottom:7}}>{seeds[plantIdx].name}을 심을까요?</div>
-              <div style={{fontSize:F.body,color:C.sub,marginBottom:22,lineHeight:1.6,fontWeight:600}}>매일 공부하면 건강하게 자라요! 🌱<br/>공부를 안 하면 하루 20%씩 시들어요.</div>
-              <BtnPrimary onClick={()=>plantSeed(plantIdx)} color={prof?.main||C.purple} style={{marginBottom:9}}>🌱 텃밭에 심기</BtnPrimary>
-              <BtnGhost onClick={()=>setPlantIdx(null)}>나중에</BtnGhost>
+          )}
+
+          {plantIdx !== null && seeds[plantIdx] && (
+            <div style={{ position: "fixed", inset: 0, background: "rgba(44,34,100,.5)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 200, padding: "0 20px" }}>
+              <div className="scaleIn" style={{ background: C.surface, borderRadius: R.xl, padding: "30px 22px", textAlign: "center", width: "100%", maxWidth: 340, boxShadow: SH.float }}>
+                <div style={{ display: "flex", justifyContent: "center", marginBottom: 11 }}><FlowerSVG color={FCLR[seeds[plantIdx].id] || "#FD79A8"} petals={FPET[seeds[plantIdx].id] || 6} size={76} /></div>
+                <div style={{ fontSize: F.h2, fontWeight: 900, color: C.text, marginBottom: 7 }}>{seeds[plantIdx].name}을 심을까요?</div>
+                <div style={{ fontSize: F.body, color: C.sub, marginBottom: 22, lineHeight: 1.6, fontWeight: 600 }}>매일 공부하면 건강하게 자라요! 🌱<br />공부를 안 하면 하루 20%씩 시들어요.</div>
+                <BtnPrimary onClick={() => plantSeed(plantIdx)} color={prof?.main || C.purple} style={{ marginBottom: 9 }}>🌱 텃밭에 심기</BtnPrimary>
+                <BtnGhost onClick={() => setPlantIdx(null)}>나중에</BtnGhost>
+              </div>
             </div>
-          </div>}
-          {/* garden */}
-          <div className="fadeUp d3" style={{background:C.surface,borderRadius:R.xl,overflow:"hidden",boxShadow:SH.card,border:`1.5px solid ${C.border}`}}>
-            <div style={{background:"linear-gradient(180deg,#C8E8F8 0%,#A0D8C0 55%,#78B890 55%)",padding:"13px 11px 0",minHeight:garden.length>0?110:170,position:"relative"}}>
-              <div style={{position:"absolute",top:9,left:14,fontSize:17,opacity:.6}}>☀️</div>
-              <div style={{position:"absolute",top:11,left:46,fontSize:12,opacity:.4}}>☁️</div>
-              {garden.length===0?(
-                <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:150,color:"rgba(255,255,255,.7)",fontWeight:800,gap:9,textAlign:"center"}}>
-                  <span style={{fontSize:40}}>🌱</span>
-                  <div><div style={{fontSize:F.h3}}>아직 비어있어요</div><div style={{fontSize:F.sm,opacity:.8,marginTop:3}}>씨앗을 심어보세요!</div></div>
+          )}
+
+          <div className="fadeUp d3" style={{ background: C.surface, borderRadius: R.xl, overflow: "hidden", boxShadow: SH.card, border: `1.5px solid ${C.border}` }}>
+            <div style={{ background: "linear-gradient(180deg,#C8E8F8 0%,#A0D8C0 55%,#78B890 55%)", padding: "13px 11px 0", minHeight: garden.length > 0 ? 110 : 170, position: "relative" }}>
+              {garden.length === 0 ? (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: 150, color: "rgba(255,255,255,.7)", fontWeight: 800, gap: 9, textAlign: "center" }}>
+                  <span style={{ fontSize: 40 }}>🌱</span>
+                  <div><div style={{ fontSize: F.h3 }}>아직 비어있어요</div><div style={{ fontSize: F.sm, opacity: .8, marginTop: 3 }}>씨앗을 심어보세요!</div></div>
                 </div>
-              ):(
-                <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"0 8px",alignItems:"flex-end"}}>
-                  {garden.map((flower,i)=><GardenFlower key={i} flower={flower} health={calcHealth(flower.plantedAt,pdata?.lastCompleted)}/>)}
+              ) : (
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "0 8px", alignItems: "flex-end" }}>
+                  {garden.map((flower, i) => <GardenFlower key={i} flower={flower} health={calcHealth(flower.plantedAt, pdata?.lastCompleted)} />)}
                 </div>
               )}
             </div>
-            <div style={{background:"linear-gradient(180deg,#6B4423,#5A3618)",padding:"7px 12px 10px",display:"flex",alignItems:"center",justifyContent:"center"}}>
-              <span style={{fontSize:11,color:"#C8A870",fontWeight:700,opacity:.8}}>🌿 우리 가족 텃밭</span>
+            <div style={{ background: "linear-gradient(180deg,#6B4423,#5A3618)", padding: "7px 12px 10px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ fontSize: 11, color: "#C8A870", fontWeight: 700, opacity: .8 }}>🌿 우리 가족 텃밭</span>
             </div>
           </div>
         </div>
@@ -521,44 +529,55 @@ export default function App(){
   }
 
   // ── FAMILY ─────────────────────────────────────────────
-  if(screen==="family")return(
-    <div style={{minHeight:"100vh",background:C.bg}}>
-      <div style={{maxWidth:480,margin:"0 auto",padding:"20px 16px 80px"}}>
-        <NavBar title="우리 가족 현황 👨‍👩‍👧‍👦" onBack={()=>setScreen("home")}/>
-        {PROFILES.map((p,i)=>{
-          const pd=profiles[p.id],ch=pd?.character?CHARS.find(c=>c.id===pd.character):null;
-          const ds=pd?.lastCompleted?Math.floor((Date.now()-new Date(pd.lastCompleted).getTime())/86400000):999;
-          return(
-            <div key={p.id} className={`fadeUp d${i+1}`} style={{background:C.surface,borderRadius:R.xl,padding:"19px 17px",marginBottom:11,boxShadow:SH.card,border:`2.5px solid ${p.pale}`}}>
-              <div style={{display:"flex",alignItems:"center",gap:13,marginBottom:13}}>
-                <div style={{width:52,height:52,borderRadius:R.md,background:p.pale,border:`2px solid ${p.main}40`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:28}}>{p.emoji}</div>
-                <div style={{flex:1}}>
-                  <div style={{fontSize:F.h3,fontWeight:900,color:C.text,display:"flex",alignItems:"center",gap:7}}>
-                    {p.name}{ch&&<CharSVG id={ch.id} size={26}/>}
+  if (screen === "family") {
+    return (
+      <div style={{ minHeight: "100vh", background: C.bg }}>
+        <div style={{ maxWidth: 480, margin: "0 auto", padding: "20px 16px 80px" }}>
+          <NavBar title="우리 가족 현황 👨‍👩‍👧‍👦" onBack={() => setScreen("home")} />
+          {PROFILES.map((p, i) => {
+            const pd = profiles[p.id], ch = pd?.character ? CHARS.find(c => c.id === pd.character) : null;
+            const ds = pd?.lastCompleted ? Math.floor((Date.now() - new Date(pd.lastCompleted).getTime()) / 86400000) : 999;
+            return (
+              <div key={p.id} className={`fadeUp d${i + 1}`} style={{ background: C.surface, borderRadius: R.xl, padding: "19px 17px", marginBottom: 11, boxShadow: SH.card, border: `2.5px solid ${p.pale}` }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 13, marginBottom: 13 }}>
+                  <div style={{ width: 52, height: 52, borderRadius: R.md, background: p.pale, border: `2px solid ${p.main}40`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28 }}>{p.emoji}</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: F.h3, fontWeight: 900, color: C.text, display: "flex", alignItems: "center", gap: 7 }}>
+                      {p.name}{ch && <CharSVG id={ch.id} size={26} />}
+                    </div>
+                    <div style={{ fontSize: F.sm, color: C.muted, fontWeight: 600 }}>집사: {ch ? ch.name : "미선택"}</div>
                   </div>
-                  <div style={{fontSize:F.sm,color:C.muted,fontWeight:600}}>집사: {ch?ch.name:"미선택"}</div>
+                  {ds >= 2 && (pd?.garden || []).length > 0 && <Pill color={C.coral} pale="#FFF0F0" style={{ fontSize: 10 }}>⚠️ {ds}일</Pill>}
                 </div>
-                {ds>=2&&(pd?.garden||[]).length>0&&<Pill color={C.coral} pale="#FFF0F0" style={{fontSize:10}}>⚠️ {ds}일</Pill>}
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 7 }}>
+                  {[{ n: (pd?.seeds || []).length, l: "씨앗" }, { n: (pd?.garden || []).length, l: "꽃" }, { n: pd?.totalCompleted || 0, l: "완료" }, { n: pd?.streak || 0, l: "연속" }].map((s, j) => (
+                    <div key={j} style={{ background: p.pale, borderRadius: R.sm, padding: "9px 4px", textAlign: "center" }}>
+                      <div style={{ fontSize: F.h3, fontWeight: 900, color: C.text }}>{s.n}</div>
+                      <div style={{ fontSize: 9, color: C.muted, fontWeight: 700 }}>{s.l}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:7}}>
-                {[{n:(pd?.seeds||[]).length,l:"🌱씨앗"},{n:(pd?.garden||[]).length,l:"🌷꽃"},{n:pd?.totalCompleted||0,l:"🏆완료"},{n:pd?.streak||0,l:"🔥연속"}].map((s,j)=>(
-                  <div key={j} style={{background:p.pale,borderRadius:R.sm,padding:"9px 4px",textAlign:"center"}}>
-                    <div style={{fontSize:F.h3,fontWeight:900,color:C.text}}>{s.n}</div>
-                    <div style={{fontSize:9,color:C.muted,fontWeight:700}}>{s.l}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  // ── MAIN RENDER ───────────────────────────────────────
+  return (
+    <div className="App" style={{
+      maxWidth: 500, margin: "0 auto", minHeight: "100vh",
+      background: C.bg, position: "relative"
+    }}>
+      <div key={sel || "none"} className="fadeUp">
+        {sel ? renderProfile() : renderMain()}
       </div>
     </div>
- );
- // App 함수 끝
+  );
+} // App 함수 끝
 
-/* ═══════════════════════════════════════════════════════
-   Shared Micro-Styles & Export
-═══════════════════════════════════════════════════════ */
 const S = {
   iconBtn: {
     width: 40, height: 40, borderRadius: R.md,
