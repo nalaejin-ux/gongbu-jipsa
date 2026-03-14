@@ -582,5 +582,3 @@ const S = {
     boxShadow: "0 8px 24px rgba(108,92,231,0.06)"
   }
 };
-
-export default App;
