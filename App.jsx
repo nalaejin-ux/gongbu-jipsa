@@ -111,7 +111,7 @@ const SI={
     {id:"m_prb",  subject:"수학",name:"문제집 풀기",se:"✏️",type:"workbook",cl:7,ig:"numeric",mt:"spacing",    unit:"페이지",tip:"식 세우기 전에 잠깐 생각하는 시간!"},
     {id:"m_book", subject:"수학",name:"수학도둑",   se:"🦸",type:"reading", cl:2,ig:"verbal", mt:"elaboration",unit:"페이지",tip:"재미있게 읽으면 개념이 스며들어요."},
     {id:"s_prb",  subject:"과학",name:"문제집 풀기",se:"🔬",type:"workbook",cl:7,ig:"numeric",mt:"elaboration",unit:"페이지",tip:"'왜?'를 말로 설명할 수 있어야 진짜!"},
-    {id:"ex_j",   subject:"운동",name:"줄넘기",     se:"🪢",type:"exercise",cl:1,ig:"motor",  mt:"embodied",   unit:"분",    tip:"심박수 올리기! 운동 후 30분이 골든타임."},
+    {id:"ex_j",   subject:"운동",name:"줄넘기",     se:"➰",type:"exercise",cl:1,ig:"motor",  mt:"embodied",   unit:"분",    tip:"심박수 올리기! 운동 후 30분이 골든타임."},
     {id:"ex_h",   subject:"운동",name:"훌라우프",   se:"⭕",type:"exercise",cl:1,ig:"motor",  mt:"embodied",   unit:"분",    tip:"균형 잡기도 소뇌 운동이에요!"},
     {id:"ex_r",   subject:"운동",name:"달리기",     se:"🏃",type:"exercise",cl:1,ig:"motor",  mt:"embodied",   unit:"분",    tip:"달리고 나서 바로 공부 시작!"},
     {id:"ex_b",   subject:"운동",name:"자전거",     se:"🚴",type:"exercise",cl:1,ig:"motor",  mt:"embodied",   unit:"분",    tip:"리듬감 있게 페달링 — 세로토닌 UP!"},
