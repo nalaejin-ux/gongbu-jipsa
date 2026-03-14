@@ -1639,16 +1639,18 @@ export default function App() {
     </div>
   );
 
-  return null;
-}
+ return (
+    <div style={{ maxWidth: 500, margin: "0 auto", minHeight: "100vh", background: DS.color.bg }}>
+      {/* 현재 step이나 view 상태에 따라 보여줄 화면을 선택 */}
+      {view === "HOME" ? renderHome : renderDashboard}
+    </div>
+  );
+} // App 함수 닫기
 
-/* Shared micro-styles */
+// 스타일 가이드가 뒤에 더 있다면 이어서 작성
 const S = {
   iconBtn: {
-    width:40, height:40, borderRadius:DS.radius.md,
-    background:DS.color.surface, border:`1.5px solid ${DS.color.border}`,
-    fontSize:18, cursor:"pointer", display:"flex",
-    alignItems:"center", justifyContent:"center",
-    boxShadow:"0 2px 8px rgba(108,92,231,0.08)",
-  },
+    width: 40, height: 40, borderRadius: DS.radius.md,
+    // ... 나머지 스타일
+  }
 };
