@@ -546,7 +546,19 @@ export default function App(){
     </div>
   );
 
-  return null;
-}
+  return (
+    <div className="App" style={{ 
+      maxWidth: 500, 
+      margin: "0 auto", 
+      minHeight: "100vh", 
+      background: C.bg, 
+      position: "relative"
+    }}>
+      <div key={sel || "none"} className="fadeUp" style={{ animation: "fadeUp 0.4s ease-out" }}>
+        {!sel ? renderProfile : renderMain}
+      </div>
+    </div>
+  );
+} // App 함수 닫기
 
-const BS={icon:{width:38,height:38,borderRadius:R.md,background:C.surface,border:`1.5px solid ${C.border}`,fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 2px 8px rgba(108,92,231,.08)"}};
+export default App;
