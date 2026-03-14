@@ -447,7 +447,7 @@ export default function App(){
     </div>
   );
 
-  // ── GARDEN ─────────────────────────────────────────────
+ // ── GARDEN ─────────────────────────────────────────────
   if (screen === "garden") {
     const ds = pdata?.lastCompleted ? Math.floor((Date.now() - new Date(pdata.lastCompleted).getTime()) / 86400000) : 999;
     return (
@@ -482,7 +482,7 @@ export default function App(){
 
           {seeds.length > 0 && (
             <div className="fadeUp d2" style={{ background: C.surface, borderRadius: R.lg, padding: "17px 15px", marginBottom: 20, boxShadow: SH.card, border: `1.5px solid ${C.border}` }}>
-              <Label style={{ marginBottom: 13 }}>씨앗 보관함 ({seeds.length}개) 🌱</Label>
+              <div style={{ fontSize: 13, fontWeight: 700, color: C.purple, marginBottom: 13 }}>씨앗 보관함 ({seeds.length}개) 🌱</div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 9 }}>
                 {seeds.map((seed, i) => (
                   <button key={i} onClick={() => setPlantIdx(i)} style={{ background: C.surfaceAlt, border: `2px dashed ${C.border}`, borderRadius: R.md, padding: "11px 13px", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 5, fontFamily: "inherit", transition: "all .15s" }}>
@@ -500,8 +500,8 @@ export default function App(){
                 <div style={{ display: "flex", justifyContent: "center", marginBottom: 11 }}><FlowerSVG color={FCLR[seeds[plantIdx].id] || "#FD79A8"} petals={FPET[seeds[plantIdx].id] || 6} size={76} /></div>
                 <div style={{ fontSize: F.h2, fontWeight: 900, color: C.text, marginBottom: 7 }}>{seeds[plantIdx].name}을 심을까요?</div>
                 <div style={{ fontSize: F.body, color: C.sub, marginBottom: 22, lineHeight: 1.6, fontWeight: 600 }}>매일 공부하면 건강하게 자라요! 🌱<br />공부를 안 하면 하루 20%씩 시들어요.</div>
-                <BtnPrimary onClick={() => plantSeed(plantIdx)} color={prof?.main || C.purple} style={{ marginBottom: 9 }}>🌱 텃밭에 심기</BtnPrimary>
-                <BtnGhost onClick={() => setPlantIdx(null)}>나중에</BtnGhost>
+                <button onClick={() => plantSeed(plantIdx)} style={{ width: "100%", background: prof?.main || C.purple, color: "#FFF", border: "none", borderRadius: R.md, padding: "14px", fontWeight: 800, cursor: "pointer", marginBottom: 9 }}>🌱 텃밭에 심기</button>
+                <button onClick={() => setPlantIdx(null)} style={{ width: "100%", background: "none", border: "none", color: C.sub, fontWeight: 700, cursor: "pointer", padding: "10px" }}>나중에</button>
               </div>
             </div>
           )}
@@ -547,7 +547,7 @@ export default function App(){
                     </div>
                     <div style={{ fontSize: F.sm, color: C.muted, fontWeight: 600 }}>집사: {ch ? ch.name : "미선택"}</div>
                   </div>
-                  {ds >= 2 && (pd?.garden || []).length > 0 && <Pill color={C.coral} pale="#FFF0F0" style={{ fontSize: 10 }}>⚠️ {ds}일</Pill>}
+                  {ds >= 2 && (pd?.garden || []).length > 0 && <div style={{ background: "#FFF0F0", color: C.coral, padding: "2px 8px", borderRadius: 10, fontSize: 10, fontWeight: 800 }}>⚠️ {ds}일</div>}
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 7 }}>
                   {[{ n: (pd?.seeds || []).length, l: "씨앗" }, { n: (pd?.garden || []).length, l: "꽃" }, { n: pd?.totalCompleted || 0, l: "완료" }, { n: pd?.streak || 0, l: "연속" }].map((s, j) => (
@@ -567,10 +567,7 @@ export default function App(){
 
   // ── MAIN RENDER ───────────────────────────────────────
   return (
-    <div className="App" style={{
-      maxWidth: 500, margin: "0 auto", minHeight: "100vh",
-      background: C.bg, position: "relative"
-    }}>
+    <div className="App" style={{ maxWidth: 500, margin: "0 auto", minHeight: "100vh", background: C.bg, position: "relative" }}>
       <div key={sel || "none"} className="fadeUp">
         {sel ? renderProfile() : renderMain()}
       </div>
