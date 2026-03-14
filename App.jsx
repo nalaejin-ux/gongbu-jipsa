@@ -546,19 +546,31 @@ export default function App(){
     </div>
   );
 
-  return (
+return (
     <div className="App" style={{ 
-      maxWidth: 500, 
-      margin: "0 auto", 
-      minHeight: "100vh", 
-      background: C.bg, 
-      position: "relative"
+      maxWidth: 500, margin: "0 auto", minHeight: "100vh", 
+      background: C.bg, position: "relative" 
     }}>
-      <div key={sel || "none"} className="fadeUp" style={{ animation: "fadeUp 0.4s ease-out" }}>
+      <div key={sel || "none"} className="fadeUp">
         {!sel ? renderProfile : renderMain}
       </div>
     </div>
   );
-} // App 함수 닫기
+} // App 함수가 여기서 끝납니다.
+
+/* ═══════════════════════════════════════════════════════
+   Shared Micro-Styles & Export
+═══════════════════════════════════════════════════════ */
+const S = {
+  iconBtn: {
+    width: 40, height: 40, borderRadius: R.md,
+    display: "flex", alignItems: "center", justifyContent: "center",
+    cursor: "pointer", transition: "all 0.2s"
+  },
+  card: {
+    background: C.surface, borderRadius: R.xl, padding: 20,
+    boxShadow: "0 8px 24px rgba(108,92,231,0.06)"
+  }
+};
 
 export default App;
