@@ -25,8 +25,12 @@ const C={purple:"#6C5CE7",purpleL:"#A29BFE",purpleP:"#EDE9FF",yellow:"#FDCB6E",p
 const F={display:"clamp(26px,7vw,34px)",h1:"clamp(20px,5vw,26px)",h2:"clamp(17px,4.5vw,21px)",h3:"clamp(15px,4vw,18px)",body:"clamp(13px,3.5vw,15px)",sm:"clamp(11px,3vw,13px)",btn:"clamp(14px,3.8vw,16px)"};
 const R={sm:10,md:16,lg:22,xl:28,full:999};
 const SH={card:"0 4px 20px rgba(108,92,231,.10),0 1px 4px rgba(0,0,0,.04)",float:"0 8px 32px rgba(108,92,231,.18)",btn:"0 4px 14px rgba(108,92,231,.35)"};
-const PC={child1:{main:"#FD79A8",pale:"#FFF0F5"},child2:{main:"#74B9FF",pale:"#EAF4FF"},mom:{main:"#00B894",pale:"#E0FAF4"},dad:{main:main:"#FDCB6E",pale:"#FFF8E7"}};
-
+const PC = {
+  child1: { main: "#FD79A8", pale: "#FFF0F5" },
+  child2: { main: "#74B9FF", pale: "#EAF4FF" }, // 지윤 파랑
+  mom:    { main: "#00B894", pale: "#E0FAF4" },
+  dad:    { main: "#FDCB6E", pale: "#FFF8E7" }  // 아빠 노랑
+};
 // ── BRAIN ENGINE ──────────────────────────────────────────
 const CP={
   sleepy:     {el:2,cap:6, wu:true, easy:true, desc:"낮은 각성 — 점진적 워밍업 필요"},
@@ -71,7 +75,12 @@ const FCLR={rose:"#FD79A8",sunflower:"#FDCB6E",tulip:"#C084FC",daisy:"#FDE68A",c
 const FPET={rose:5,sunflower:8,tulip:6,daisy:8,cherry:5,clover:4,star:5,rainbow:6,crystal:7};
 
 // ── DATA ──────────────────────────────────────────────────
-const PROFILES=[{id:"child1",name:"나은이",emoji:"🌸",...PC.child1},{id:"child2",name:"지윤이",emoji:"💙",...PC.child2},{id:"mom",name:"엄마",emoji:"💚",...PC.mom},{id:"dad",name:"아빠",emoji:"⭐",...PC.dad}];
+const PROFILES = [
+  { id: "child1", name: "나은이", emoji: "🌸", ...PC.child1 },
+  { id: "child2", name: "지윤이", emoji: "💙", ...PC.child2 },
+  { id: "mom",    name: "엄마",   emoji: "💚", ...PC.mom },
+  { id: "dad",    name: "아빠",   emoji: "⭐", ...PC.dad }
+];
 const CHARS=[
   {id:"rabbit", name:"토끼",  bg:"#EDE9FF",accent:"#6C5CE7",phrases:{greet:["안녕! 토끼 집사야! 깡충깡충 시작! 🥕"],study:["과학적 순서야! 믿고 해봐! 💜"],check:["잘했어! 도파민 UP! 🎉","완벽해! 계속 가자!","훌륭해!"],done:["오늘 뇌풀가동 성공!! 🏆"],reward:["씨앗 획득! 꼭 심어줘 🌱"]}},
   {id:"elephant",name:"코끼리",bg:"#EAF4FF",accent:"#74B9FF",phrases:{greet:["든든한 코끼리 집사야! 🐘"],study:["한 발씩 나아가면 돼! 🦶"],check:["훌륭해! 계속!","잘하고 있어! 💙","멋져!"],done:["묵묵히 해냈어! 대단해! 🏆"],reward:["열심히 한 보상이야! 🌱"]}},
