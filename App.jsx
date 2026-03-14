@@ -571,7 +571,7 @@ export default function App(){
   );
 } // App 함수 끝
 
-const S = {
+const BS = {
   iconBtn: {
     width: 40, height: 40, borderRadius: R.md,
     display: "flex", alignItems: "center", justifyContent: "center",
