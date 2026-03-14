@@ -25,7 +25,8 @@ const C={purple:"#6C5CE7",purpleL:"#A29BFE",purpleP:"#EDE9FF",yellow:"#FDCB6E",p
 const F={display:"clamp(26px,7vw,34px)",h1:"clamp(20px,5vw,26px)",h2:"clamp(17px,4.5vw,21px)",h3:"clamp(15px,4vw,18px)",body:"clamp(13px,3.5vw,15px)",sm:"clamp(11px,3vw,13px)",btn:"clamp(14px,3.8vw,16px)"};
 const R={sm:10,md:16,lg:22,xl:28,full:999};
 const SH={card:"0 4px 20px rgba(108,92,231,.10),0 1px 4px rgba(0,0,0,.04)",float:"0 8px 32px rgba(108,92,231,.18)",btn:"0 4px 14px rgba(108,92,231,.35)"};
-const PC={child1:{...}, child2:{...}, mom:{...}, dad:{main:"#FDCB6E", pale:"#FFF8E7"}};
+const PC={child1: { main: "#FD79A8", pale: "#FFF0F5" }, child2: { main: "#74B9FF", pale: "#EAF4FF" }, mom: { main: "#00B894", pale: "#E0FAF4" }, dad: { main: "#FDCB6E", pale: "#FFF8E7" }};
+
 // ── BRAIN ENGINE ──────────────────────────────────────────
 const CP={
   sleepy:     {el:2,cap:6, wu:true, easy:true, desc:"낮은 각성 — 점진적 워밍업 필요"},
