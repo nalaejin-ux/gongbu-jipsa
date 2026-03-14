@@ -553,19 +553,8 @@ export default function App(){
         })}
       </div>
     </div>
-  );
-
-return (
-    <div className="App" style={{ 
-      maxWidth: 500, margin: "0 auto", minHeight: "100vh", 
-      background: C.bg, position: "relative" 
-    }}>
-      <div key={sel || "none"} className="fadeUp">
-        {!sel ? renderProfile : renderMain}
-      </div>
-    </div>
-  );
-} // App 함수가 여기서 끝납니다.
+ );
+ // App 함수 끝
 
 /* ═══════════════════════════════════════════════════════
    Shared Micro-Styles & Export
